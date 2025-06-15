@@ -1,2 +1,7 @@
-# Bachelor-Thesis
-This is my Bachelor-Thesis
+# My Thesis to obtain the BSc in Mathematics
+
+## Who it's aimed for: 
+
+## Further discussions:
+
+## Lessons Learned:
