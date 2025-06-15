@@ -1,10 +1,4 @@
 \documentclass[12pt,a4paper, twoside, autooneside=false]{scrartcl}
-% scrartcl ist eine abgeleitete Artikel-Klasse im Koma-Skript
-% zur Kontrolle des Umbruchs Klassenoption draft verwenden
-
-
-% die folgenden Packete erlauben den Gebrauch von Umlauten und ß
-% in der Latex Datei
 \usepackage[utf8]{inputenc}
 % \usepackage[latin1]{inputenc} %  Alternativ unter Windows
 \usepackage[T1]{fontenc}
@@ -35,15 +29,7 @@
   }}  
 \makeatletter 
 \usepackage[top=35mm,bottom=25mm,rmargin=25mm,lmargin=35mm]{geometry}
-
-
-% Abstand obere Blattkante zur Kopfzeile ist 2.54cm - 15mm
 \setlength{\topmargin}{-15mm}
-
-
-% Umgebungen für Definitionen, Sätze, usw.
-% Es werden Sätze, Definitionen etc innerhalb einer Section mit 
-% 1.1, 1.2 etc durchnummeriert, ebenso die Gleichungen mit (1.1), (1.2) ..
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{korollar}[theorem]{Corollary}
@@ -77,9 +63,6 @@
 \newcommand{\N}{\mathbb{N}} % natuerliche
 
 \begin{document}
-  % Keine Seitenzahlen im Vorspann
-  %\fancyhead[R0,LE]
-  % Titelblatt der Arbeit
      \cfoot{}
      \chead{}
      \ofoot{}
@@ -115,20 +98,11 @@
   \end{center}
 \end{titlepage}
 
-  % Inhaltsverzeichnis
 
 
 \newpage\null\thispagestyle{empty}\newpage
  \tableofcontents
 \newpage
-
-  % Ab sofort Seitenzahlen in der Kopfzeile anzeigen
-%\pagestyle{fancy}
-%\fancyhf{}
-%\fancyhead[RO]{\leftmark}
-%\fancyhead[L]{\leftmark}
-%\fancyhead[LO]{\thepage}
-%\renewcommand{\headrulewidth}{0pt}
    \rehead{\rightmark}
    \lohead{\leftmark}
    \ohead*{\pagemark}
@@ -143,12 +117,6 @@ We then define the deletion and contraction action of subsets of matroids and us
 \indent We will discuss how a graph can always be expressed as a matroid, but not every matroid can be expressed as a graph. The matroid for a graph $G = (V,E)$ has groundset $E$. We can compute the incidence matrix belonging to $G$ and consider the columns of the matrix as vectors in a vector space. The collection of independent sets for the matroid are the sets of edges whose corresponding vectors are linear independent. Hence the Tutte Polynomial can be defined on graphs. When proving that the graph polynomials from chapter 2 are specializations of the Tutte Polynomial, a particular problem arises. The recipe theorem can not be applied the way it was stated. Because there are two graph constructions that correspond to the direct some of matroids, the one point join and the distinct union of graphs. Also when we construct a matroid for some graph, we loose a lot of information about the vertices of the graph. For example, isolated vertices an no longer be observed. But this information is quite important for many graph polynomials. In section 4.4 we prove a recipe theorem for graph polynomials, that fixes this problem. \\
 The last chapter scratches the surface of complexity of the Tutte polynomial and its applications. In fact Francois Jaeger, Dominic Vertigan and Dominic Welsh proved in their paper "On the computational complexity of the Jones and Tutte polynomials" \cite{JaVeWe1990} that the problem of evaluating the Tutte Polynomial at a point in the $(x,y)$-plane is $\#$-P hard, except at the hyperbola $(x - 1)(y - 1) = 1$ and for 8 specific points in the plane. We will also discuss what graph invariant needs to be bounded such that this problem is in P. We finish the thesis with connections between topological knot theory and the Tutte polynomial and coding theory and the Tutte polynomial. A more detailed overview of all applications of the Tutte Polynomial surely gives "The Handbook of the Tutte Polynomial and Related Topics" edited by Joanna Ellis-Monaghan and Ian Moffatt \cite{ElMo2022}. The interested reader may also find an overview of approximation results for the Tutte Polynomial in \cite{ElMo2022}. 
 \newpage
-%     \chead{}
-%     \ohead{}
-%     \ihead{}
-%    \rehead{\rightmark}
-%    \lohead{\leftmark}
-%    \ohead*{\pagemark}
 \section{Graphs}
 Even though graph theory is a very interesting part of mathematics, it is not part of the undergraduate studies of every mathematician. Thus we are going to introduce in Section 2.1 the definitions used throughout this thesis in as little detail as needed. We mostly follow \cite{GoRo2001}. We introduce the notions of \textit{spanning forests}, \textit{bridges} and \textit{loops} with regard to the definition of \textit{bases}, \textit{coloops} and \textit{loops} for matroids in Chapter 3 and Chapter 4. In section 2.2 we will discuss \textit{planar graphs} and explain the construction of the \textit{geometric dual} of a planar graph. We also define the oparations of \textit{deleting} and \textit{contracting} an edge in Section 2.1, so that we can define the \textit{deletion-contraction algorithm} in Section 2.3. We use the deletion-contraction algorithm to compute the number of \textit{spanning trees} and the number of \textit{acyclic orientations} of a graph. Moreover, this algorithm can also be used to compute specific \textit{graph polynomials} belonging to a graph. In this thesis, we focus on the \textit{chromatic polynomial}, the \textit{flow polynomial} and the \textit{reliability polynomial}. Subsections 2.4.1 - 2.4.3 give a detailed introduction into each problem statement and show how each polynomial can be computed using the algorithm. We illustrate with different small examples throughout Section 2.4.
 \subsection{Preliminaries in Graph Theory} 
@@ -686,18 +654,6 @@ Hence,
 William Thomas Tutte developed the Tutte polynomial for graphs by looking at two specific graph polynomials which are computable through a deletion-contraction recursion: the chromatic polynomial and the flow polynomial. Chris Godsil and Gordon Royle used the chromatic polynomial and the reliability polynomial in Chapter 15 of \cite{GoRo2001} to give examples of graph polynomials that are computable through a deletion-contraction algorithm. The goal of this chapter is to give a short overview of the basic concepts in vertex coloring, network flows and network reliability. We will be able to prove the deletion-contraction recursion formulas for each polynomial. In Section 4.4 we will show the connection between these polynomials and the Tutte polynomial. But for now we will only consider them as graph invariants. However, we will refrain from proving that each polynomial is indeed an invariant, which is going to follow immediately from the recursive formulas.
 \subsubsection{Colorings and the Chromatic Polynomial}
 This subsection gives a detailed overview of the most important concepts in vertex coloring. We are going to start by defining a proper $\lambda$-coloring and the chromatic number $\chi(G)$ for an arbitrary graph $G$. We will then use combinatorial techinques to compute the chromatic number for complete graphs and trees, before finally proving the computation of the chromatic polynomial through a deletion-contraction algorithm. We will follow the definitions of Chapters 1 and 15 in \cite{GoRo2001} and fill in some details from Chapter 11 in \cite{ElMo2022}.
-%\begin{definition}
-%\textcolor{orange}{nicht nötig, wenn lemma draußen}
-%Let $G,H$ be two graphs and $f$ be a map 
-%\[
-%f: V(G) \to V(H)
-%\]
-%such that 
-%\[
-%(u,v) \in E(G) \Longrightarrow (f(u),f(y)) \in E(H)
-%\]
-%We call the map $f$ a \textit{homomorphism}.
-%\end{definition}
 \begin{definition}
 Let $G$ be a graph. Given a positive integer $\lambda$ we call a map \[
 \varphi: V(G) \to \{1, 2, \dots, \lambda\}
@@ -714,15 +670,6 @@ We call
 \]
 the \textit{chromatic number} of $G$.
 \end{definition}
-%\begin{lemma}
-%Let $G$ be a graph. The chromatic number of a graph $G$ is the least %integer $r$ such that there is a homomorphism $\varphi: V(G) \to V(K_r)$. 
-%\end{lemma}
-%\begin{proof}
-%This is a proof.
-%\end{proof}
-%\begin{beispiel}
-%Hier Beispiele mit verschiedenen vollständigen Graphen als Subgraphen.
-%\end{beispiel}
 In combinatorics it is of interest to deduce the number of proper $\lambda$-colorings of a graph $G$, which we will denote by $P(G,\lambda)$. For some graphs it is quite easy to determine this number using combinatorial techniques.
 \begin{proposition} 
 Let $G = K_n$ be the complete graph on $n$ vertices, then 
@@ -1516,16 +1463,6 @@ and with $\mathcal{B}^{A \cup B} \cap (A \cup B) = \mathcal{B}^{A \cup B}$ and $
 \[
 \rk(A) + \rk(B) \geq |\mathcal{B}^{A \cup B}| + |\mathcal{B}^{A \cap B}| = \rk(A \cup B) + \rk(A \cap B). \qedhere
 \] 
-%Let $\M = (\Omega, \mathcal{I})$ be a matroid and $A,B \subseteq \Omega$. We will use the definition of a rank function. Let $\mathcal{B}^\cap$ be a basis of $\M_{|_{A \cap B}} = (A \cap B, \mathcal{I}^\cap)$ with $\mathcal{I}^\cap = \{I \in \mathcal{I}: I \subseteq A \cap B\}$ and consider the matroid $\M_{|_{A \cup B}} = (A \cup B, \mathcal{I}^\cap)$ with collection of independent sets \textcolor{red}{schlecht!!!}
-
-%Let $\M = (\Omega, \mathcal{I})$ be a matroid and $A,B \subseteq \Omega$. We will use the definition of the rank function: Let $\mathcal{B}^\cap$ be a basis of $\M_{|_{A \cap B}}= (A \cap B, \mathcal{I}^\cap)$ with $\mathcal{I}^\cap = \{I \in \mathcal{I}: I \subseteq A \cap B\}$. Since $\M_{|_{A \cup B}} = (A \cup B, \mathcal{I}^\cup)$ with $\mathcal{I}^\cup = \{I \in \mathcal{I} | I \subseteq A \cup B\}$, $\mathcal{I}^\cap \subseteq \mathcal{I}^\cup$ and $\mathcal{B}^\cap \in \mathcal{I}^\cup$. Hence, it exists a basis $\mathcal{B}^\cup$ of $\M_{|_{A \cup B}}$ such that $\mathcal{B}^\cap \subseteq \mathcal{B}^\cup$. Now the intersections $\mathcal{B}^\cup \cap A \subseteq A$ and $\mathcal{B}^\cup \cap B \subseteq B$ are themselves independent in $\M$ as they are subsets of independent sets. Since they are contained in $A$,$B$ respectively they are independent in $\M_{|_A}$, $\M_{|_B}$ respectively. Therefore with the definition of the rank function, and R3 we get $\rk(A) \geq |\mathcal{B}^\cup \cap A|$ and $\rk(B) \geq |\mathcal{B}^\cup \cap B|$. With this information we can prove the inequality: 
-%\begin{align*}
-%\rk(A) + \rk(B) &\geq |B^\cup \cap A| + |B^\cup \cap B| \\
-%&= |(B^\cup \cap A) \cup (B^\cup \cap B)| + |(B^\cup \cap A)\cap (B^\cup \cap B)| \\
-%&= |B^\cup \cap (A \cup B)| + |B^\cup \cap A \cap B| \\
-%&= |B^\cup| + |B^\cap| \\
-%&= \rk(A \cup B) + \rk(A \cap B). \qedhere
-%\end{align*}
 \end{proof}
 We chose to introduce a matroid through its set of independent sets, but \cite{GoRo2001} characterize a matroid through its rank function.
 Theorem 3.13 shows the equivalence of these two approaches. We will need the following lemma for its proof.
@@ -3195,37 +3132,4 @@ where $A_i = |\{v \in C : \mathrm{wt}(v) = i\}|$. \\
 \newpage
 \bibliographystyle{alpha}
 \bibliography{refs}
-
-%\begin{thebibliography}{Lam00}
-  % Literaturbeispiel: Buch
-%  \bibitem[GoRo01]{Godsil/Royle: 2001} Chris Godsil, Gordon Royle: \textit{Algebraic Graph Theory} Springer, 2001
-%\bibitem[ElMo22]{El/Mo: 2022} edited by Joanna A. Ellis-Monaghan and Iain Moffatt: \textit{Handbook of the Tutte Polynomial and Related Topics} CRC Press, 2022
-%\bibitem[Bol98]{Bol: 1998} Béla Bollobás: \textit{Modern Graph Theory} Springer, 1998
-%\bibitem[Oxley11]{Oxley: 2011} James Oxley: \textit{Matroid Theory} Oxford University Press, 2011
-%\bibitem[Welsh93]{Welsh: 1993} Dominic James Anthony Welsh: \textit{Complexity: Knots, Colourings and Counting} Cambridge University Press, 1993
-%\bibitem[Welsh76]{Welsh: 1976} Dominic James Anthony Welsh: 
-%\textit{Matroid Theory} Academic Press Inc.
-%\bibitem[Wilson86]{Wilson: 1986} Robin James Wilson: %\textit{Introduction to Graph Theory} Longman Scientific $\&$ Technical
-%\end{thebibliography}
- 
-      
-  % ggf. hier Tabelle mit Symbolen 
-  % (kann auch auf das Inhaltsverzeichnis folgen)
- 
-
-
-%\vspace*{8cm}
-%
-%\section*{Erkl\"arung}
-
-%Hier kommt die Erklärung.
-%\\[2ex] 
-
-%\noindent
-%Ort, den Datum\\[5ex]
-
-% Unterschrift (handgeschrieben)
-
-
-
 \end{document}
